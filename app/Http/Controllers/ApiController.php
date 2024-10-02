@@ -9,6 +9,8 @@ use Illuminate\Routing\Controller as BaseController;
 
 class ArpiController extends Controller
 {
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    
     public function index()
     {
         return Article::all();
