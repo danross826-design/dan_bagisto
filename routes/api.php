@@ -20,3 +20,7 @@ Route::get('/user', function (Request $request) {
 Route::get('/', function (Request $request) {
     return $request->index();
 })->middleware('auth:sanctum');
+
+Route::get('/item', function (Request $request) {
+    return $request->item();
+})->middleware('auth:sanctum');
