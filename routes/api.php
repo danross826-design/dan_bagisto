@@ -24,3 +24,7 @@ Route::get('/', function (Request $request) {
 Route::get('/item', function (Request $request) {
     return $request->item();
 })->middleware('auth:sanctum');
+
+Route::get('/account', function (Request $request) {
+    return $request->account();
+})->middleware('auth:sanctum');
