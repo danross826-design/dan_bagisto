@@ -7,7 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
-class ArpiController extends Controller
+class ArticleController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
@@ -41,4 +41,5 @@ class ArpiController extends Controller
 
         return response()->json(null, 204);
     }
+
 }

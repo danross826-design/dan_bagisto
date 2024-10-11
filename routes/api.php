@@ -13,18 +13,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-
 Route::get('/', function (Request $request) {
     return $request->index();
-})->middleware('auth:sanctum');
-
-Route::get('/item', function (Request $request) {
-    return $request->item();
-})->middleware('auth:sanctum');
-
-Route::get('/account', function (Request $request) {
-    return $request->account();
 })->middleware('auth:sanctum');
