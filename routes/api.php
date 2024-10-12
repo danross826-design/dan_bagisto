@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function (Request $request) {
     return $request->index();
 })->middleware('auth:sanctum');
+
+Route::post('article', 'ArticleController@store');
