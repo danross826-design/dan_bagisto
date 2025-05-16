@@ -15,6 +15,8 @@ $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
 
+//This is bootstrap
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
