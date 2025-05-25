@@ -7,38 +7,38 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
-class ArticleController extends Controller
+class CategoryController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     public function index()
     {
-        return Article::all();
+        return Category::all();
     }
-    
+
 
     public function show(string $id)
     {
-        $article = Article::findOrFail($id);
+        $article = Category::findOrFail($id);
 
         return $article;
     }
 
     public function store(Request $request)
     {
-        $article = Article::create($request->all());
+        $article = Category::create($request->all());
 
         return response()->json($article, 201);
     }
 
-    public function update(Request $request, Article $article)
+    public function update(Request $request, Category $article)
     {
         $article->update($request->all());
 
         return response()->json($article, 200);
     }
 
-    public function delete(Article $article)
+    public function delete(Category $article)
     {
         $article->delete();
 
