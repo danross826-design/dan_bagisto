@@ -17,6 +17,7 @@ class CategoryController extends Controller
     }
 
 
+
     public function show(string $id)
     {
         $article = Category::findOrFail($id);
