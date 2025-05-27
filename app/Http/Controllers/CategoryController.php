@@ -20,28 +20,28 @@ class CategoryController extends Controller
 
     public function show(string $id)
     {
-        $article = Category::findOrFail($id);
+        $category = Category::findOrFail($id);
 
-        return $article;
+        return $category;
     }
 
     public function store(Request $request)
     {
-        $article = Category::create($request->all());
+        $category = Category::create($request->all());
 
-        return response()->json($article, 201);
+        return response()->json($category, 201);
     }
 
-    public function update(Request $request, Category $article)
+    public function update(Request $request, Category $category)
     {
-        $article->update($request->all());
+        $category->update($request->all());
 
-        return response()->json($article, 200);
+        return response()->json($category, 200);
     }
 
-    public function delete(Category $article)
+    public function delete(Category $category)
     {
-        $article->delete();
+        $category->delete();
 
         return response()->json(null, 204);
     }
