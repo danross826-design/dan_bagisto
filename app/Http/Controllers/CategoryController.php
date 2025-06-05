@@ -26,6 +26,8 @@ class CategoryController extends Controller
         return $category;
     }
 
+    
+
 
     public function store(Request $request)
     {
