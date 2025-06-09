@@ -20,6 +20,7 @@ Route::get('/', function (Request $request) {
 Route::post('article', 'ArticleController@store');
 
 
+
 Route::post('category', 'CategoryController@store');
 
 Route::post('user', 'UserController@store');
