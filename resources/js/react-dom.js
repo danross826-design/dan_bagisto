@@ -19,6 +19,7 @@
   } else if (typeof define === "function" && define.amd) {
     define(['react'], f);
 
+
   // <script>
   } else {
     var g

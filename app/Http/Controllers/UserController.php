@@ -20,6 +20,7 @@ class UserController extends Controller
     {
         return $user;
     }
+    
 
     public function store(Request $request)
     {
