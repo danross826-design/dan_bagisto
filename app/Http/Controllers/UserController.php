@@ -19,8 +19,9 @@ class UserController extends Controller
     public function show(User $user)
     {
         return $user;
+        
     }
-    
+
 
     public function store(Request $request)
     {
