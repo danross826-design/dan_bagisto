@@ -19,10 +19,8 @@ class UserController extends Controller
     public function show(User $user)
     {
         return $user;
-        
+
     }
-
-
     public function store(Request $request)
     {
         $user = User::create($request->all());
