@@ -11,6 +11,7 @@ class ArpiController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
+    
 
 
 }
