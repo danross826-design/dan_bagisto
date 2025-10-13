@@ -1,0 +1,24 @@
+<x-layout>
+	<form method="POST" action="/jobs">
+		<div class="space-y-12">
+			<div class="border-b border-gray-900/10 pb-12">
+				<h2>Create New Job</h2>
+				<p>We just need a handful of details from you</p>
+				<div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+					<div class="sm:col-span-4">
+						<x-form-label for="title">Title</x-form-label> 
+						<div>
+							<x-form-error name="title" />
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+
+	</form>
+
+
+
+</x-layout>
