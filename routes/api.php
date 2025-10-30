@@ -17,6 +17,7 @@ Route::get('/', function (Request $request) {
     return $request->index();
 })->middleware('auth:sanctum');
 
+
 Route::post('article', 'ArticleController@store');
 
 Route::post('category', 'CategoryController@store');
