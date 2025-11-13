@@ -4,17 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function(){
 
-	return	view('home', [
-		"jobs" => [
-
-			[
-				'title' => 'Director',
-				'salary' => '50,000'
-
-
-			]
-
-		]
+	return	view('home');
 })
 
 Route::get('/about', function(){
@@ -26,3 +16,5 @@ Route::get('/contact', function(){
 
 	return	view('contact');
 })
+
+Route::post('/jobs',[JobsController::class, 'store'])->name(jobs.store);

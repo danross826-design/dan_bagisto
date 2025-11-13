@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Job extends Model
 {
-    protected $table = jobs;
+    protected $table = 'jobs';
 
     use HasFactory;
 
@@ -16,7 +16,7 @@ class Job extends Model
      */
     protected $fillable = [
         'title',
-        'pay',
+        'salary',
     ];
 
     /**
@@ -27,4 +27,8 @@ class Job extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function employer()
+    {
+        return $this->belongsTo(Employer::class);
+    }
 }
