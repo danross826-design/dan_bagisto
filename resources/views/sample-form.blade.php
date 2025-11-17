@@ -28,6 +28,7 @@
 
         <label for="email">Email:</label><br>
         <input type="email" id="email" name="email" value="{{ old('email') }}"><br><br>
+        
 
         <label for="message">Message:</label><br>
         <textarea id="message" name="message">{{ old('message') }}</textarea><br><br>
@@ -35,6 +36,6 @@
 
         <button type="submit">Submit</button>
     </form>
-    
+
 </body>
 </html>
