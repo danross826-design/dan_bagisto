@@ -20,7 +20,7 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
 
-        return $article;
+        return view('article.show', ['article' => $article]);
     }
 
     public function store(Request $request)

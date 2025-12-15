@@ -22,7 +22,7 @@ class JobController extends Controller
     {
         $job = Job::findOrFail($request->id);
 
-        return $job;
+        return view('job.show', ['job' => $job]);
     }
 
     public function store(Request $request)
