@@ -21,6 +21,7 @@ class UserController extends Controller
         return view('user.show', ['user' => $user]);
 
     }
+    
 
     public function store(Request $request)
     {
