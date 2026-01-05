@@ -6,7 +6,14 @@ use Livewire\Component;
 
 class Clicker extends Component
 {
-	public $username = "testuser";
+	#[Rule('required|min:2|max:50')]
+	public $name = '';
+
+	#[Rule('required|email|unique:users')]
+	public $email = '';
+
+	#[Rule('required')]
+	public $password = '';
 
 	public function handleClick()
 	{
@@ -15,10 +22,12 @@ class Clicker extends Component
 
 	public function createNewUser()
 	{
+		$validated = $this->validate();
+
 		User::create([
-			'name' => "test user",
-			'email' => "test@test.com",
-			'password' => '1634343'
+			'name' => $validated['name'],
+			'email' => $validated['email'],
+			'password' => Hash::make($validated['password'])
 		]);
 	}
 

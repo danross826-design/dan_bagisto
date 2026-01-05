@@ -6,4 +6,9 @@
 
 		<button >Create</button>
 	</form>
+	<hr>
+
+	@foreach ($users as $user)
+		<h3 class="">{{ $user->name }}</h3>
+	@endforeach
 </div>
