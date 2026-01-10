@@ -29,30 +29,13 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>Welcome to Your Laravel Application!</h1>
-        <p>This is a sample welcome page using Laravel Blade.</p>
-
-        {{-- Example of displaying a variable passed from a route or controller --}}
-        @if(isset($name))
-            <p>Hello, {{ $name }}!</p>
-        @else
-            <p>Feel free to explore.</p>
-        @endif
-
-        {{-- Example of a simple loop --}}
-        @php
-            $items = ['Item 1', 'Item 2', 'Item 3'];
-        @endphp
-        @if(!empty($items))
-            <h2>Some Items:</h2>
-            <ul>
-                @foreach($items as $item)
-                    <li>{{ $item }}</li>
-                @endforeach
-            </ul>
-        @endif
+        <input wire:model="name" >
+        @error('name')
+            <span class="">{{ $message }}</span>
+        @enderror
     </div>
 </body>
 </html>

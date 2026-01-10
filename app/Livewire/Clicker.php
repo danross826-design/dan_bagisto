@@ -29,6 +29,10 @@ class Clicker extends Component
 			'email' => $validated['email'],
 			'password' => Hash::make($validated['password'])
 		]);
+
+		$this->reset(['name','email','password']);
+
+		request()->session()->flash('success', "User Created");
 	}
 
 	public function render()
