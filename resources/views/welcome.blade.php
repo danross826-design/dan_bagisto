@@ -30,7 +30,6 @@
     </style>
 </head>
 
-
 <body>
     <div class="container">
         <input wire:model="name" >
