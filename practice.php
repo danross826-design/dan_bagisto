@@ -30,7 +30,7 @@ function integerToRoman($num) {
 
         // Subtract the value of the matches from the number
         $n = $n % $number;
-    
+
     return $result;
 }
 
