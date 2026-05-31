@@ -12,6 +12,7 @@ class ArticleController extends Controller
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     public function index()
+    
 
     {
         return Article::all();
