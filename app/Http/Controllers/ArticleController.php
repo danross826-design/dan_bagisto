@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 class ArticleController extends Controller
 {
+    
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     public function index()
