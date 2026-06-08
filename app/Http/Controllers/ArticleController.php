@@ -18,7 +18,6 @@ class ArticleController extends Controller
         return Article::all();
     }
     
-
     public function show(string $id)
     {
         $article = Article::findOrFail($id);
