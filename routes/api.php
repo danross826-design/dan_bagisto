@@ -21,4 +21,6 @@ Route::post('article', 'ArticleController@store');
 
 Route::post('category', 'CategoryController@store');
 
+Route::post('tag', 'TagController@store');
+
 Route::post('user', 'UserController@store');
