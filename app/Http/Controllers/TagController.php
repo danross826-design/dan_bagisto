@@ -11,5 +11,6 @@ use Illuminate\Routing\Controller as BaseController;
 
 class JobController extends Controller
 {
+    
 
 }
