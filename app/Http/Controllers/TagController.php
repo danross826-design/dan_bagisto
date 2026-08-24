@@ -9,20 +9,20 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controller as BaseController;
 
-class JobController extends Controller
+class TagController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     public function index()
     {
-        return Job::all();
+        return Tag::all();
     }
 
     public function show(Request $request)
     {
-        $job = Job::findOrFail($request->id);
+        $tag = Tag::findOrFail($request->id);
 
-        return view('job.show', ['job' => $job]);
+        return view('tag.show', ['tag' => $tag]);
     }
 
     public function store(Request $request)
@@ -34,14 +34,14 @@ class JobController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/job/create')
+            return redirect('/tag/create')
                 ->withErrors($validator)
                 ->withInput();
         }else{
 
-            $job = Job::create($request->all());
+            $tag = Tag::create($request->all());
 
-            return response()->json($job, 201);
+            return response()->json($tag, 201);
 
         }
 
@@ -50,18 +50,18 @@ class JobController extends Controller
     public function update(Request $request)
     {
 
-        $job = Job::findOrFail($request->id);
+        $tag = Tag::findOrFail($request->id);
 
-        $job->update($request->all());
+        $tag->update($request->all());
 
-        return response()->json($job, 200);
+        return response()->json($tag, 200);
     }
 
     public function delete(Request $request)
     {
-        $job = Job::findOrFail($request->id);
+        $tag = Tag::findOrFail($request->id);
 
-        $job->delete();
+        $tag->delete();
 
         return response()->json(null, 204);
     }
