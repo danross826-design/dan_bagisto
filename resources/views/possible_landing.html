@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loom — Invoicing for people who hate invoicing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16202A;
+    --ink-soft: #4A5560;
+    --parchment: #EEEAE0;
+    --parchment-deep: #E4DECF;
+    --panel: #F7F5EF;
+    --teal: #3E6F68;
+    --teal-deep: #2C514C;
+    --line: rgba(22, 32, 42, 0.14);
+    --radius: 3px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Public Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--teal-deep);
+    outline-offset: 3px;
+  }
+
+  /* ---------- Header ---------- */
+
+  header {
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: var(--parchment);
+    z-index: 10;
+  }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 32px;
+  }
+
+  .logo {
+    font-family: 'Newsreader', serif;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 36px;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav a {
+    text-decoration: none;
+    font-size: 15px;
+    color: var(--ink-soft);
+    transition: color 0.15s ease;
+  }
+
+  nav a:hover { color: var(--ink); }
+
+  .nav-cta {
+    display: inline-block;
+    padding: 9px 18px;
+    background: var(--ink);
+    color: var(--parchment) !important;
+    border-radius: var(--radius);
+    font-size: 14.5px;
+    text-decoration: none;
+  }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    margin: 5px 0;
+  }
+
+  /* ---------- Hero ---------- */
+
+  .hero {
+    padding: 100px 0 90px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .hero-copy h1 {
+    font-size: 56px;
+    max-width: 11.5em;
+  }
+
+  .hero-copy .lede {
+    margin-top: 24px;
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 34em;
+  }
+
+  .hero-actions {
+    margin-top: 36px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 13px 24px;
+    background: var(--teal-deep);
+    color: #F7F5EF;
+    text-decoration: none;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 500;
+    transition: background 0.15s ease;
+  }
+
+  .btn-primary:hover { background: var(--ink); }
+
+  .hero-actions .fine-print {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Hero invoice mockup ---------- */
+
+  .mock {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 28px 26px;
+    box-shadow: 0 1px 0 rgba(22,32,42,0.03);
+  }
+
+  .mock-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mock-top .who { font-size: 13px; color: var(--ink-soft); }
+  .mock-top .num { font-family: 'Newsreader', serif; font-size: 20px; }
+
+  .mock-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14.5px;
+  }
+
+  .mock-row .desc { color: var(--ink); }
+  .mock-row .amt { color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+
+  .mock-total {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 18px;
+    align-items: baseline;
+  }
+
+  .mock-total .label { font-size: 14px; color: var(--ink-soft); }
+  .mock-total .value {
+    font-family: 'Newsreader', serif;
+    font-size: 26px;
+  }
+
+  .mock-badge {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 12.5px;
+    background: rgba(62,111,104,0.14);
+    color: var(--teal-deep);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  /* ---------- Trust strip ---------- */
+
+  .trust {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0;
+  }
+
+  .trust .wrap {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Features ---------- */
+
+  .features {
+    padding: 100px 0;
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 64px;
+  }
+
+  .features h2 {
+    font-size: 34px;
+    max-width: 9.5em;
+    position: sticky;
+    top: 110px;
+  }
+
+  .feature-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feature-item {
+    padding: 30px 0;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 24px;
+  }
+
+  .feature-item:last-child { border-bottom: 1px solid var(--line); }
+
+  .feature-item .tag {
+    font-size: 14px;
+    color: var(--ink-soft);
+    padding-top: 3px;
+  }
+
+  .feature-item h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .feature-item p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    max-width: 34em;
+    margin: 0;
+  }
+
+  /* ---------- CTA band ---------- */
+
+  .cta-band {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 90px 0;
+  }
+
+  .cta-band .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .cta-band h2 {
+    font-size: 36px;
+    color: var(--parchment);
+    max-width: 12em;
+  }
+
+  .cta-band .btn-primary {
+    background: var(--parchment);
+    color: var(--ink);
+    padding: 15px 28px;
+    white-space: nowrap;
+  }
+
+  .cta-band .btn-primary:hover { background: #fff; }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    padding: 48px 0;
+  }
+
+  footer .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  footer .logo { font-size: 17px; }
+
+  footer .links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  footer .links a { text-decoration: none; }
+  footer .links a:hover { color: var(--ink); }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding: 64px 0 56px; gap: 44px; }
+    .hero-copy h1 { font-size: 40px; }
+    .features { grid-template-columns: 1fr; gap: 28px; }
+    .features h2 { position: static; }
+    nav { display: none; }
+    .nav-toggle { display: block; }
+    .cta-band h2 { font-size: 28px; }
+  }
+
+  @media (max-width: 520px) {
+    .wrap { padding: 0 20px; }
+    .header-row { padding: 18px 20px; }
+    .hero-copy h1 { font-size: 32px; }
+    .feature-item { grid-template-columns: 1fr; gap: 6px; }
+    .cta-band .wrap { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-row wrap">
+    <div class="logo">Loom</div>
+    <nav>
+      <ul>
+        <li><a href="#features">What it does</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#" class="nav-cta">Start free</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap" style="display: contents;">
+    <div class="hero-copy">
+      <h1>Send the invoice before you forget you're owed money.</h1>
+      <p class="lede">Loom builds a clean, professional invoice in under a minute, then chases the payment for you — reminders included, awkward follow-up emails not required.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary">Start free</a>
+        <span class="fine-print">No card needed. First 5 invoices free.</span>
+      </div>
+    </div>
+
+    <div class="mock">
+      <div class="mock-top">
+        <div>
+          <div class="who">Bill to</div>
+          <div class="num">Hanover &amp; Co.</div>
+        </div>
+        <div class="who">INV-0148</div>
+      </div>
+      <div class="mock-row">
+        <span class="desc">Brand identity — phase 2</span>
+        <span class="amt">$2,400.00</span>
+      </div>
+      <div class="mock-row">
+        <span class="desc">Revisions (3 rounds)</span>
+        <span class="amt">$450.00</span>
+      </div>
+      <div class="mock-row">
+        <span class="desc">Print-ready export</span>
+        <span class="amt">$150.00</span>
+      </div>
+      <div class="mock-total">
+        <span class="label">Total due Sep 23</span>
+        <span class="value">$3,000.00</span>
+      </div>
+      <span class="mock-badge">Reminder scheduled</span>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <span>Designers</span>
+    <span>Copywriters</span>
+    <span>Developers</span>
+    <span>Consultants</span>
+    <span>Photographers</span>
+  </div>
+</div>
+
+<section class="features" id="features">
+  <div class="wrap" style="display: contents;">
+    <h2>Everything after "send" is the hard part.</h2>
+
+    <div class="feature-list">
+      <div class="feature-item">
+        <span class="tag">Build</span>
+        <div>
+          <h3>An invoice that looks like you meant it</h3>
+          <p>Pick a client, add line items, done. Your logo and payment details are saved so you're never rebuilding the same invoice from scratch.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="tag">Follow up</span>
+        <div>
+          <h3>Reminders sent before things get awkward</h3>
+          <p>Loom emails a polite nudge a few days before and after the due date, in your voice, so you don't have to be the one asking.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="tag">Get paid</span>
+        <div>
+          <h3>A pay link on every invoice</h3>
+          <p>Clients pay by card or bank transfer straight from the invoice. You see the moment it lands, no bank app checking required.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="tag">Track</span>
+        <div>
+          <h3>One list of who owes you what</h3>
+          <p>Outstanding, overdue, and paid — sorted automatically, so tax season doesn't start with an afternoon of forensic accounting.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="pricing">
+  <div class="wrap">
+    <h2>Free for your first 5 invoices. $9/month after that.</h2>
+    <a href="#" class="btn-primary">Start free</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo">Loom</div>
+    <ul class="links">
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>
