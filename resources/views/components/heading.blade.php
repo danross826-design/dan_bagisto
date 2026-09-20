@@ -17,6 +17,8 @@
     };
 @endphp
 
+
+
 <div {{ $attributes->merge(['class' => "mb-6 $alignClass"]) }}>
     <{{ $tag }} class="{{ $sizeClass }} text-gray-900">
         {{ $title }}
