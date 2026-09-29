@@ -15,8 +15,9 @@
         'h5' => 'text-lg font-medium',
         'h6' => 'text-base font-medium',
     };
-    
+
 @endphp
+
 
 <div {{ $attributes->merge(['class' => "mb-6 $alignClass"]) }}>
     <{{ $tag }} class="{{ $sizeClass }} text-gray-900">
