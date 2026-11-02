@@ -14,10 +14,10 @@
         'h4' => 'text-xl font-semibold',
         'h5' => 'text-lg font-medium',
         'h6' => 'text-base font-medium',
+        
     };
 
 @endphp
-
 
 
 
